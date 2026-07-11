@@ -14,7 +14,7 @@ export default function Footer() {
       <div className={styles.container}>
         {/* Logo */}
         <div className={styles.item}>
-          <h2>Barber Booking</h2>
+          <h2>Smile Barber</h2>
 
           <p>
             Đặt lịch cắt tóc nhanh chóng với đội ngũ Barber chuyên nghiệp.

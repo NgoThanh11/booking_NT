@@ -24,12 +24,19 @@
 }
 
 .logo {
-  text-decoration: none;
+  display: flex;
+  align-items: center;
 
-  font-size: 30px;
-  font-weight: 700;
+  img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
 
-  color: #15397f;
+  &:hover img {
+    transform: scale(1.05);
+  }
 }
 
 .menu {
@@ -114,13 +121,27 @@
 
 @media (max-width: 992px) {
 
+  .container {
+    height: 72px;
+    padding: 0 18px;
+  }
+
   .menu,
   .actions {
     display: none;
   }
 
   .menuBtn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+
+  .logo {
+    img {
+      height: 50px;
+    }
   }
 }
 
@@ -139,5 +160,29 @@
 
   .menuBtn {
     font-size: 28px;
+  }
+}
+/* ===========================
+      Mobile nhỏ (300px - 490px)
+=========================== */
+@media (min-width: 300px) and (max-width: 490px) {
+
+  .container {
+    height: 65px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    img {
+      height: 42px;
+    }
+  }
+
+  .menuBtn {
+    font-size: 26px;
+  }
+
+  .navbar {
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
   }
 }

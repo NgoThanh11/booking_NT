@@ -1,4 +1,4 @@
-.services {
+.service {
   padding: 80px 0;
   background: #f8fafc;
 }
@@ -36,7 +36,7 @@
         Grid
 ====================== */
 
-.grids {
+.grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
@@ -47,41 +47,116 @@
 ====================== */
 
 .card {
-  background: #fff;
+  background: white;
 
-  border-radius: 18px;
+  border-radius: 20px;
 
-  padding: 30px;
+  padding: 22px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e8edf5;
 
-  text-align: center;
-
-  transition: all 0.3s ease;
+  transition: 0.3s;
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
 
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
   }
 
   h3 {
-    margin: 18px 0 12px;
+    font-size: 28px;
 
-    font-size: 24px;
+    color: #15397f;
 
-    color: #111827;
-  }
-
-  p {
-    color: #6b7280;
-
-    line-height: 1.7;
-
-    margin-bottom: 25px;
+    margin-bottom: 12px;
   }
 }
+.desc {
+  white-space: pre-line;
 
+  line-height: 1.7;
+
+  color: #555;
+
+  margin-bottom: 22px;
+
+  min-height: 70px;
+}
+.imageBox {
+  background: #e9f2ff;
+
+  border-radius: 24px;
+
+  padding: 18px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 22px;
+
+  img {
+    width: 180px;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+  }
+}
+.footer {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+.time {
+  width: max-content;
+
+  border: 2px solid #15397f;
+
+  border-radius: 30px;
+
+  padding: 6px 18px;
+
+  color: #15397f;
+
+  font-weight: 600;
+}
+.price {
+  text-decoration: none;
+
+  display: block;
+
+  width: 100%;
+
+  text-align: center;
+
+  background: #15397f;
+
+  color: white;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  padding: 15px 0;
+
+  border-radius: 40px;
+
+  transition: 0.3s;
+
+  &:hover {
+    background: #c9a227;
+
+    color: #111;
+  }
+}
+x
 /* ======================
         Icon
 ====================== */
@@ -94,7 +169,7 @@
         Button
 ====================== */
 
-.buttons {
+.button {
   display: inline-block;
 
   padding: 12px 28px;
@@ -119,7 +194,7 @@
 ====================== */
 
 @media (max-width: 992px) {
-  .grids {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -133,48 +208,33 @@
 ====================== */
 
 @media (max-width: 768px) {
-  .services {
-    padding: 60px 0;
-  }
-
-  .container {
-    padding: 0 16px;
-  }
-
-  .grids {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .grid {
+    grid-template-columns: 1fr;
   }
 
   .card {
-    padding: 24px;
+    padding: 18px;
   }
 
-  .heading {
-    h2 {
-      font-size: 28px;
-    }
-
-    p {
-      font-size: 15px;
-    }
+  .card h3 {
+    font-size: 24px;
   }
 
-  .icon {
-    font-size: 50px;
+  .price {
+    font-size: 22px;
   }
 
-  .buttons {
-    display: block;
-    width: 100%;
-    padding: 14px 0;
+  .imageBox img {
+    width: 150px;
+
+    height: 150px;
   }
 }
 /* ===========================
       Mobile nhỏ (300px - 490px)
 =========================== */
 @media (min-width: 300px) and (max-width: 490px) {
-  .services {
+  .service {
     padding: 40px 0;
   }
 
@@ -196,7 +256,7 @@
     }
   }
 
-  .grids {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
@@ -217,7 +277,7 @@
     font-size: 36px;
   }
 
-  .buttons {
+  .button {
     padding: 10px 0;
     font-size: 14px;
   }

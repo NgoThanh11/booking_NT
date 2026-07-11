@@ -11,12 +11,12 @@ export default function Header() {
         <div className={styles.contact}>
           <span>
             <FiPhoneCall />
-            0123 456 789
+            0988668888
           </span>
 
           <span>
             <FiMail />
-            barberbooking@gmail.com
+            SmileT@gmail.com
           </span>
         </div>
 

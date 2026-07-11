@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import styles from "../../assets/styles/Navar.module.scss";
+import logoImage from "../../assets/images/smile.png";
 
 export default function Navbar() {
   return (
@@ -8,7 +9,7 @@ export default function Navbar() {
       <div className={styles.container}>
         {/* Logo */}
         <Link to="/" className={styles.logo}>
-          Barber Booking
+          <img src= {logoImage} alt="Smile BarberShop" />
         </Link>
 
         {/* Menu */}
