@@ -1,0 +1,55 @@
+.header {
+  background: #15397f;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.container {
+  max-width: 1200px;
+  height: 42px;
+
+  margin: auto;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact {
+  display: flex;
+  gap: 25px;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: #fff;
+  }
+}
+
+.link {
+  display: flex;
+  gap: 20px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+
+    &:hover {
+      color: #dbeafe;
+    }
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+  .header {
+    display: none;
+  }
+}

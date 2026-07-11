@@ -1,0 +1,143 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  background: #fff;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+
+  height: 80px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  text-decoration: none;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  color: #15397f;
+}
+
+.menu {
+  display: flex;
+  gap: 35px;
+
+  list-style: none;
+
+  li {
+    a {
+      text-decoration: none;
+
+      color: #374151;
+
+      font-weight: 500;
+
+      transition: .3s;
+
+      &:hover {
+        color: #15397f;
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.loginBtn,
+.bookingBtn {
+  padding: 10px 22px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.loginBtn {
+  background: #fff;
+
+  border: 1px solid #15397f;
+
+  color: #15397f;
+
+  &:hover {
+    background: #f4f7ff;
+  }
+}
+
+.bookingBtn {
+  background: #15397f;
+
+  color: #fff;
+
+  border: none;
+
+  &:hover {
+    background: #0f2f6a;
+  }
+}
+
+.menuBtn {
+  display: none;
+
+  background: none;
+  border: none;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+  color: #15397f;
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+
+  .menu,
+  .actions {
+    display: none;
+  }
+
+  .menuBtn {
+    display: block;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+  .container {
+    height: 70px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .menuBtn {
+    font-size: 28px;
+  }
+}
