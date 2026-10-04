@@ -1,0 +1,507 @@
+.page {
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #17233c;
+  }
+
+  p {
+    margin: 5px 0 0;
+    color: #8290a4;
+    font-size: 13px;
+  }
+}
+
+.exportBtn {
+  border: 0;
+  background: #2477df;
+  color: #fff;
+  border-radius: 7px;
+  padding: 10px 17px;
+  cursor: pointer;
+  font-size: 12px;
+
+  &:hover {
+    background: #1765c8;
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 9px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.stat span,
+.stat strong {
+  display: block;
+}
+
+.stat span {
+  color: #8491a4;
+  font-size: 12px;
+}
+
+.stat strong {
+  color: #1d2a40;
+  font-size: 23px;
+  margin-top: 4px;
+}
+
+.blue {
+  background: #e9f2ff;
+  color: #2879e5;
+}
+
+.orange {
+  background: #fff0dc;
+  color: #ed912b;
+}
+
+.green {
+  background: #e5f8ed;
+  color: #1da05e;
+}
+
+.red {
+  background: #ffebed;
+  color: #e74c5c;
+}
+
+.filterCard {
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 9px;
+  padding: 17px;
+  display: flex;
+  align-items: end;
+  gap: 13px;
+  margin-bottom: 18px;
+}
+
+.searchBox {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #dfe6ef;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+  color: #8996a9;
+
+  input {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+.filterItem {
+  width: 190px;
+
+  label {
+    display: block;
+    font-size: 11px;
+    color: #68768a;
+    margin-bottom: 6px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #dfe6ef;
+    border-radius: 7px;
+    background: #fff;
+    padding: 0 10px;
+    outline: none;
+    color: #47566c;
+    font-size: 11px;
+  }
+}
+
+.resetBtn {
+  height: 40px;
+  padding: 0 14px;
+  background: #f2f5f8;
+  border: 0;
+  border-radius: 7px;
+  color: #617086;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 50px;
+}
+
+.tableCard {
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  padding: 19px 20px;
+
+  h3 {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  span {
+    display: block;
+    color: #8a96a8;
+    font-size: 11px;
+    margin-top: 5px;
+  }
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1150px;
+
+  th {
+    background: #f5f8fc;
+    color: #68768a;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 13px 12px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    border-bottom: 1px solid #edf1f5;
+    padding: 13px 12px;
+    font-size: 10px;
+    color: #536177;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover {
+    background: #fafcff;
+  }
+}
+
+.bookingId {
+  color: #2477df;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  > div:last-child {
+    min-width: 125px;
+  }
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    color: #263650;
+    font-size: 11px;
+  }
+
+  span {
+    color: #8b97a9;
+    margin-top: 4px;
+    font-size: 9px;
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eaf1fb;
+  color: #2879df;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  span {
+    color: #394860;
+  }
+}
+
+/* 1. Xử lý cột Chi nhánh không bị tràn tràn sang cột khác */
+.branch {
+  max-width: 220px; /* Tăng nhẹ độ rộng nếu cần */
+  display: block;
+  line-height: 1.4;
+  word-break: break-word; /* Xuống dòng khi text quá dài */
+  white-space: normal;
+}
+
+/* 2. Xử lý phần Ngày / Giờ không bị chèn dòng lên nhau */
+.datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  white-space: nowrap; /* Giữ ngày giờ không bị vỡ dòng lung tung */
+
+  strong {
+    color: #3e4c62;
+    font-size: 11px;
+    line-height: 1.3; /* Thêm line-height để tránh đè chữ */
+  }
+
+  span {
+    color: #2477df;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 9px;
+  white-space: nowrap;
+
+  i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: block;
+  }
+}
+
+.status.pending {
+  background: #fff3df;
+  color: #d88720;
+
+  i {
+    background: #e99a2d;
+  }
+}
+
+.status.confirmed {
+  background: #e5f7ed;
+  color: #1c9860;
+
+  i {
+    background: #23a768;
+  }
+}
+
+.status.completed {
+  background: #e7f0ff;
+  color: #2777df;
+
+  i {
+    background: #2777df;
+  }
+}
+
+.status.cancelled {
+  background: #ffebed;
+  color: #dc4857;
+
+  i {
+    background: #dc4857;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.actions button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.viewBtn {
+  background: #edf3fb;
+  color: #52708f;
+}
+
+.confirmBtn {
+  background: #e5f7ed;
+  color: #1d9c60;
+}
+
+.cancelBtn {
+  background: #ffebed;
+  color: #df4c5a;
+}
+
+.empty {
+  padding: 50px;
+  text-align: center;
+  color: #8996a9;
+}
+
+.pagination {
+  min-height: 60px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > span {
+    color: #8996a9;
+    font-size: 10px;
+  }
+
+  > div {
+    display: flex;
+    gap: 4px;
+  }
+
+  button {
+    min-width: 29px;
+    height: 29px;
+    border: 1px solid #e1e7ef;
+    background: #fff;
+    border-radius: 5px;
+    color: #68768a;
+    cursor: pointer;
+  }
+
+  .current {
+    background: #2477df;
+    color: #fff;
+    border-color: #2477df;
+  }
+}
+
+@media (max-width: 900px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filterCard {
+    flex-wrap: wrap;
+  }
+
+  .searchBox {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .pageHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filterItem {
+    width: 100%;
+  }
+
+  .resetBtn {
+    width: 100%;
+  }
+}
+
+//css nút Booking admin
+.completeBtn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #2e9d5b;
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+
+  i {
+    font-size: 15px;
+  }
+
+  &:hover {
+    background: #24864b;
+  }
+}
+.disabledBtn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  background: #f5f5f5;
+  color: #aaa;
+
+  cursor: not-allowed;
+  opacity: 0.7;
+
+  i {
+    font-size: 15px;
+  }
+}
