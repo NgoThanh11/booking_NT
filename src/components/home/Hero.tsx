@@ -1,14 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import styles from "../../assets/styles/Hero.module.scss";
 import HeroSlider from "../SliderShow/SliderShow";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <span className={styles.badge}>
-            Smile BarberShop
-          </span>
+          <span className={styles.badge}>Smile BarberShop</span>
 
           <h1>
             Đặt lịch cắt tóc
@@ -17,18 +17,19 @@ export default function Hero() {
           </h1>
 
           <p>
-            Đặt lịch với đội ngũ Barber chuyên nghiệp. Chọn dịch vụ,
-            thời gian và thợ cắt tóc chỉ trong vài phút.
+            Đặt lịch với đội ngũ Barber chuyên nghiệp. Chọn dịch vụ, thời gian
+            và thợ cắt tóc chỉ trong vài phút.
           </p>
 
           <div className={styles.buttons}>
-            <button className={styles.primaryBtn}>
+            <button
+              className={styles.primaryBtn}
+              onClick={() => navigate("/Booking")}
+            >
               Đặt lịch ngay
             </button>
 
-            <button className={styles.secondaryBtn}>
-              Xem dịch vụ
-            </button>
+            <button className={styles.secondaryBtn}>Xem dịch vụ</button>
           </div>
         </div>
 

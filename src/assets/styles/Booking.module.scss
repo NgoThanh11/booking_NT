@@ -17,7 +17,7 @@
 
   padding: 40px;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
   box-sizing: border-box;
 }
@@ -28,7 +28,7 @@
 
   h2 {
     font-size: 38px;
-    color: #15397F;
+    color: #15397f;
     margin-bottom: 10px;
   }
 
@@ -68,11 +68,11 @@
 
     box-sizing: border-box;
 
-    transition: .3s;
+    transition: 0.3s;
 
     &:focus {
-      border-color: #15397F;
-      box-shadow: 0 0 0 3px rgba(21, 57, 127, .15);
+      border-color: #15397f;
+      box-shadow: 0 0 0 3px rgba(21, 57, 127, 0.15);
     }
   }
 }
@@ -88,7 +88,7 @@ button {
   border: none;
   border-radius: 12px;
 
-  background: #15397F;
+  background: #15397f;
   color: white;
 
   font-size: 18px;
@@ -96,10 +96,10 @@ button {
 
   cursor: pointer;
 
-  transition: .3s;
+  transition: 0.3s;
 
   &:hover {
-    background: #C9A227;
+    background: #c9a227;
     color: #111;
   }
 }
@@ -109,7 +109,6 @@ button {
 ======================= */
 
 @media (min-width: 491px) and (max-width: 992px) {
-
   .booking {
     padding: 60px 20px;
   }
@@ -123,15 +122,13 @@ button {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
-
 }
 
 /* =======================
    Mobile
 ======================= */
 
-@media (min-width:300px) and (max-width:490px) {
-
+@media (min-width: 300px) and (max-width: 490px) {
   .booking {
     padding: 25px 12px;
   }
@@ -148,7 +145,6 @@ button {
   }
 
   .heading {
-
     h2 {
       font-size: 28px;
     }
@@ -156,7 +152,6 @@ button {
     p {
       font-size: 14px;
     }
-
   }
 
   .form {
@@ -169,31 +164,172 @@ button {
   }
 
   .group {
-
     input,
     select {
       width: 100%;
       height: 46px;
       font-size: 14px;
     }
-
   }
 
   button {
     height: 48px;
     font-size: 16px;
   }
-
 }
 
 /* =======================
    Desktop
 ======================= */
 
-@media (min-width:993px) {
-
+@media (min-width: 993px) {
   .container {
     max-width: 900px;
   }
+}
 
+//Css popup thành công
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+
+  padding: 20px;
+}
+
+.successModal {
+  width: 100%;
+  max-width: 480px;
+
+  background: #fff;
+  border-radius: 20px;
+
+  padding: 35px 32px 30px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  animation: successModalShow 0.3s ease;
+}
+
+.successIcon {
+  width: 76px;
+  height: 76px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e8f8ee;
+  border: 5px solid #c8efd6;
+
+  span {
+    font-size: 42px;
+    font-weight: 700;
+    color: #20a35a;
+    line-height: 1;
+  }
+}
+
+.successModal h2 {
+  margin: 0;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  color: #222;
+}
+
+.successMessage {
+  margin: 10px 0 24px;
+
+  color: #777;
+  font-size: 15px;
+}
+
+.bookingInfo {
+  background: #f8f8f8;
+
+  border-radius: 14px;
+
+  padding: 16px 18px;
+
+  text-align: left;
+
+  margin-bottom: 25px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #e9e9e9;
+
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  span {
+    color: #777;
+    flex-shrink: 0;
+  }
+
+  strong {
+    color: #222;
+    text-align: right;
+  }
+}
+
+.successButton {
+  width: 100%;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 13px 20px;
+
+  background: #15397f;
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  &:hover {
+    background: #15397f;
+  }
+}
+
+@keyframes successModalShow {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
