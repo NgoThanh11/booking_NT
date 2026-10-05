@@ -1,7 +1,15 @@
 import axiosClient from "../../src/api/axios";
 //Danh sách dịch vụ
-export const GetAllServices = async () => {
-  const response = await axiosClient.get("/Services");
+export const GetAllServices = async (
+  page: number = 1,
+  pageSize: number = 10,
+) => {
+  const response = await axiosClient.get("/Services", {
+    params: {
+      page,
+      pageSize,
+    },
+  });
   return response.data;
 };
 //Chi tiết

@@ -120,10 +120,12 @@ export default function Booking() {
     label: `${branch.branchName} - ${branch.branchAddress}`,
   }));
 
-  const barberOptions = barbers.map((barber) => ({
-    value: barber.barberId,
-    label: `${barber.name} - ${barber.experience || ""}`,
-  }));
+  const barberOptions = barbers
+    .filter((barber) => barber.branchId === branchId)
+    .map((barber) => ({
+      value: barber.barberId,
+      label: `${barber.name} - ${barber.experience || ""}`,
+    }));
 
   const serviceOptions = services.map((service) => ({
     value: service.id,

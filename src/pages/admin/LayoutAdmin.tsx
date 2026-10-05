@@ -1,12 +1,14 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import styles from "../../assets/styles/LayoutAmin.module.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import logoImage from "../../assets/images/smile.png";
+
 const menuItems = [
   { path: "/admin", icon: "⌂", label: "Dashboard", end: true },
   { path: "/admin/Booking", icon: "▣", label: "Lịch đặt" },
   { path: "/admin/service", icon: "✂", label: "Dịch vụ" },
   { path: "/admin/barbers", icon: "♙", label: "Barber" },
-  { path: "/admin/branches", icon: "⌖", label: "Chi nhánh" },
+  { path: "/admin/branch", icon: "⌖", label: "Chi nhánh" },
   { path: "/admin/customers", icon: "♟", label: "Khách hàng" },
   { path: "/admin/service-images", icon: "▧", label: "Hình ảnh dịch vụ" },
   { path: "/admin/settings", icon: "⚙", label: "Cài đặt" },
@@ -20,8 +22,9 @@ export default function AdminLayout() {
           <div className={styles.logoIcon}>✂</div>
 
           <div>
-            <h2>BARBER SHOP</h2>
-            <span>ADMIN PANEL</span>
+            <Link to="/admin" className={styles.logoAdmin}>
+              <img src={logoImage} alt="Smile BarberShop" />
+            </Link>
           </div>
         </div>
 
@@ -49,14 +52,11 @@ export default function AdminLayout() {
 
       <main className={styles.main}>
         <header className={styles.header}>
-          <div >
-  
-          </div>
+          <div></div>
 
           <div className={styles.headerRight}>
             <button className={styles.notification}>
-              ♧
-              <b>3</b>
+              ♧<b>3</b>
             </button>
 
             <div className={styles.user}>
