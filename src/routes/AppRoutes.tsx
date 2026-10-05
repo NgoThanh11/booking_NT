@@ -12,10 +12,16 @@ import ServiceAdd from "../pages/admin/Service/Add";
 import ServiceEdit from "../pages/admin/Service/Update";
 import BranchAdmin from "../pages/admin/Branch/list";
 import BranchDetail from "../pages/admin/Branch/detail";
+import BranchAdd from "../pages/admin/Branch/add";
+import BranchUpdate from "../pages/admin/Branch/update";
+import Login from "../pages/Auth/login";
 
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Đăng nhập */}
+      <Route path="/login" element={<Login />} />
+      {/*  */}
       {/* Giao diện */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
@@ -28,22 +34,21 @@ export default function AppRoutes() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         //#region Quản lý đặt lịch
-        <Route path="Booking" element={<BookingAdmin/>} />
-        <Route path="Booking/:id" element={<BookingDetail/>} />
+        <Route path="Booking" element={<BookingAdmin />} />
+        <Route path="Booking/:id" element={<BookingDetail />} />
         //#endregion
         <Route path="barbers" element={<div>Barber</div>} />
         <Route path="branches" element={<div>Chi nhánh</div>} />
         <Route path="customers" element={<div>Khách hàng</div>} />
         //#region Quản lý dịch vụ
-        <Route path="service" element={<ServiceAdmin/>} />
-        <Route path="service/add" element={<ServiceAdd/>} />
-        <Route path="service/update/:id" element={<ServiceEdit/>} />
-        //#endregion
-        //#region Quản lý chi nhánh
-        <Route path="branch" element={<BranchAdmin/>} />
-        <Route path="branch/detail/:id" element={<BranchDetail/>} />
-        <Route path="branch/add" element={<ServiceAdd/>} />
-        <Route path="branch/update/:id" element={<ServiceEdit/>} />
+        <Route path="service" element={<ServiceAdmin />} />
+        <Route path="service/add" element={<ServiceAdd />} />
+        <Route path="service/update/:id" element={<ServiceEdit />} />
+        //#endregion //#region Quản lý chi nhánh
+        <Route path="branch" element={<BranchAdmin />} />
+        <Route path="branch/detail/:id" element={<BranchDetail />} />
+        <Route path="branch/add" element={<BranchAdd />} />
+        <Route path="branch/update/:id" element={<BranchUpdate />} />
         //#endregion
         <Route path="settings" element={<div>Cài đặt</div>} />
       </Route>

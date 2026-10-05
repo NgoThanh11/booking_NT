@@ -4,6 +4,7 @@ import { deleteService, GetAllServices } from "../../../api/ServiceApi";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
+import Pagination from "../../../components/Pagination/Pagination";
 interface Service {
   id: number;
   name: string;
@@ -21,18 +22,25 @@ export default function ServiceAdmin() {
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [status, setStatus] = useState("ALL");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
 
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
 
-  const loadServices = async () => {
+  const loadServices = async (page = currentPage) => {
     try {
       setLoading(true);
 
-      const response = await GetAllServices();
+      const response = await GetAllServices(page, pageSize);
 
       console.log("SERVICE API:", response);
 
-      setServices(response || []);
+      setServices(response?.data || []);
+      setCurrentPage(response.page);
+      setTotalItems(response.totalItems);
+      setTotalPages(response.totalPages);
     } catch (error) {
       console.error("Lỗi lấy danh sách dịch vụ:", error);
     } finally {
@@ -41,7 +49,7 @@ export default function ServiceAdmin() {
   };
 
   useEffect(() => {
-    loadServices();
+    loadServices(1);
   }, []);
 
   const formatPrice = (price: number) => {
@@ -170,7 +178,6 @@ export default function ServiceAdmin() {
           <div>
             <h3>Danh sách dịch vụ</h3>
 
-            <span>Hiển thị {filteredServices.length} dịch vụ</span>
           </div>
         </div>
 
@@ -326,23 +333,13 @@ export default function ServiceAdmin() {
 
         {/* PAGINATION */}
 
-        <div className={styles.pagination}>
-          <span>
-            Hiển thị{" "}
-            {filteredServices.length > 0
-              ? `1 - ${filteredServices.length}`
-              : "0"}{" "}
-            trong tổng số {filteredServices.length}
-          </span>
-
-          <div>
-            <button disabled>‹</button>
-
-            <button className={styles.current}>1</button>
-
-            <button disabled>›</button>
-          </div>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          pageSize={pageSize}
+          onPageChange={loadServices}
+        />
       </section>
     </div>
   );

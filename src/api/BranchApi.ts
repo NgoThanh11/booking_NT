@@ -17,7 +17,7 @@ export const getBranchById = async (id: number) => {
 };
 //Thêm chi nhánh
 export const createBranch = async (data: any) => {
-  const response = await axiosClient.post("/Branches", data);
+  const response = await axiosClient.post("/Branches/create-branch", data);
   return response.data;
 };
 //Cập nhật chi nhánh
@@ -28,7 +28,7 @@ export const updateBranch = async (id: number, data: any) => {
   );
   return response.data;
 };
-//Xóa chi nahsnh
+//Xóa chi nhánh
 export const deleteBranch = async (id: number) => {
   const response = await axiosClient.delete(`/Branches/delete-branch?id=${id}`);
   return response.data;

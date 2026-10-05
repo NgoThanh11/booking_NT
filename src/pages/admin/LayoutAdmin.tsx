@@ -1,7 +1,10 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import styles from "../../assets/styles/LayoutAmin.module.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import logoImage from "../../assets/images/smile.png";
+import Swal from "sweetalert2";
+import { logoutApi } from "../../api/LoginApi";
+import { Toaster } from "react-hot-toast";
 
 const menuItems = [
   { path: "/admin", icon: "⌂", label: "Dashboard", end: true },
@@ -10,13 +13,68 @@ const menuItems = [
   { path: "/admin/barbers", icon: "♙", label: "Barber" },
   { path: "/admin/branch", icon: "⌖", label: "Chi nhánh" },
   { path: "/admin/customers", icon: "♟", label: "Khách hàng" },
-  { path: "/admin/service-images", icon: "▧", label: "Hình ảnh dịch vụ" },
+  {
+    path: "/admin/service-images",
+    icon: "▧",
+    label: "Hình ảnh dịch vụ",
+  },
   { path: "/admin/settings", icon: "⚙", label: "Cài đặt" },
 ];
 
 export default function AdminLayout() {
+  const navigate = useNavigate();
+
+  // Lấy thông tin user đã lưu khi đăng nhập
+  const userData = localStorage.getItem("user");
+
+  const user = userData ? JSON.parse(userData) : null;
+
+  const fullName = user?.fullName || "Admin";
+  const role = user?.role || "Quản trị viên";
+
+  // Lấy chữ cái đầu tên
+  const avatar = fullName?.trim()?.charAt(0)?.toUpperCase() || "A";
+
+  // Đăng xuất
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: "Đăng xuất",
+      text: "Bạn có chắc chắn muốn đăng xuất không?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý",
+      cancelButtonText: "Hủy",
+    });
+
+    if (!result.isConfirmed) return;
+
+    // Thực hiện gọi API đăng xuất
+    try {
+      await logoutApi();
+    } catch (error) {
+      console.error("Lỗi API Logout (vẫn tiến hành xóa session):", error);
+    } finally {
+      // Luôn luôn xóa Token + User info và chuyển hướng
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+
+      // Điều hướng và clear state nếu cần
+      navigate("/login", { replace: true });
+    }
+  };
+
   return (
     <div className={styles.admin}>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            fontSize: "14px",
+          },
+        }}
+      />
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
           <div className={styles.logoIcon}>✂</div>
@@ -39,12 +97,14 @@ export default function AdminLayout() {
               }
             >
               <span className={styles.menuIcon}>{item.icon}</span>
+
               <span>{item.label}</span>
             </NavLink>
           ))}
         </nav>
 
-        <button className={styles.logout}>
+        {/* LOGOUT */}
+        <button className={styles.logout} onClick={handleLogout}>
           <span>⇥</span>
           Đăng xuất
         </button>
@@ -55,19 +115,15 @@ export default function AdminLayout() {
           <div></div>
 
           <div className={styles.headerRight}>
-            <button className={styles.notification}>
-              ♧<b>3</b>
-            </button>
-
+            {/* USER */}
             <div className={styles.user}>
-              <div className={styles.avatar}>A</div>
+              <div className={styles.avatar}>{avatar}</div>
 
               <div>
-                <strong>Admin</strong>
-                <span>Quản trị viên</span>
-              </div>
+                <strong style={{ width: 100 }}>{fullName}</strong>
 
-              <span>⌄</span>
+                <span>{role === "Admin" ? "Quản trị viên" : role}</span>
+              </div>
             </div>
           </div>
         </header>

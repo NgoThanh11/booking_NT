@@ -6,20 +6,22 @@ export const createBooking = async (data: any) => {
   return response.data;
 };
 //Danh sách đặt lịch
-export const getAllBooking = async () => {
-  const response = await axiosClient.get("/Booking/get-all-booking")
+export const getAllBooking = async (page: number = 1, pageSize: number=10) => {
+  const response = await axiosClient.get("/Booking/get-all-booking", {
+    params: {
+      page,
+      pageSize,
+    },
+  });
   return response.data;
-}
+};
 //Chi tiết đặt lịch
-export const getDetailBooking = async(id: number) => {
-    const response = await axiosClient.get(`Booking/get-booking-detail?id=${id}`);
-    return response.data;
-} 
+export const getDetailBooking = async (id: number) => {
+  const response = await axiosClient.get(`Booking/get-booking-detail?id=${id}`);
+  return response.data;
+};
 //Update trạng thái đặt lịch
-export const updateBookingStatus = async (
-  id: number,
-  status: string
-) => {
+export const updateBookingStatus = async (id: number, status: string) => {
   const response = await axiosClient.put(
     `/Booking/update-status?id=${id}`,
     status,
@@ -27,7 +29,7 @@ export const updateBookingStatus = async (
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   return response.data;

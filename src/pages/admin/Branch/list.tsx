@@ -72,9 +72,9 @@ export default function BranchAdmin() {
     );
   });
 
-  // =========================
+
   // XÓA CHI NHÁNH
-  // =========================
+
   const handleDelete = async (id: number) => {
     const result = await Swal.fire({
       title: "Xóa chi nhánh?",
@@ -133,7 +133,7 @@ export default function BranchAdmin() {
 
         <button
           className={styles.addBtn}
-          onClick={() => navigate("/admin/Branch/add")}
+          onClick={() => navigate("/admin/branch/add")}
         >
           <i className="bi bi-plus-lg"></i>
 

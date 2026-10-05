@@ -25,10 +25,11 @@ export default function HairMan() {
         const data = await GetAllServices();
 
         // Chỉ lấy dịch vụ đang hoạt động
-        const activeServices = data.filter(
+        const activeServices = data?.data?.filter(
           (item: Service) => item.status === true,
         );
-
+        console.log(1111, activeServices);
+        
         setServices(activeServices);
       } catch (error) {
         console.error("Lỗi lấy danh sách dịch vụ:", error);

@@ -3,6 +3,7 @@ import styles from "../../../assets/styles/BookingAdmin.module.scss";
 import { getAllBooking, updateBookingStatus } from "../../../api/BookingApi";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import Pagination from "../../../components/Pagination/Pagination";
 
 interface Booking {
   id: number;
@@ -37,7 +38,11 @@ export default function BookingAdmin() {
   const [keyword, setKeyword] = useState("");
   const [status, setStatus] = useState("ALL");
   const [date, setDate] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
 
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
 
   const formatDate = (dateString: string) => {
@@ -50,11 +55,11 @@ export default function BookingAdmin() {
 
   // GET ALL BOOKING
 
-  const loadBookings = async () => {
+  const loadBookings = async (page = currentPage) => {
     try {
       setLoading(true);
 
-      const response = await getAllBooking();
+      const response = await getAllBooking(page, pageSize);
 
       console.log("BOOKING API:", response);
 
@@ -97,6 +102,9 @@ export default function BookingAdmin() {
       }));
 
       setBookings(mappedBookings);
+      setCurrentPage(response.page);
+      setTotalItems(response.totalItems);
+      setTotalPages(response.totalPages);
     } catch (error) {
       console.error("Lỗi lấy danh sách đặt lịch:", error);
     } finally {
@@ -245,7 +253,7 @@ export default function BookingAdmin() {
             setStatus("ALL");
           }}
         >
-          ↻ 
+          ↻
         </button>
       </section>
 
@@ -437,23 +445,13 @@ export default function BookingAdmin() {
 
         {/* PAGINATION */}
 
-        <div className={styles.pagination}>
-          <span>
-            Hiển thị{" "}
-            {filteredBookings.length > 0
-              ? `1 - ${filteredBookings.length}`
-              : "0"}{" "}
-            trong tổng số {filteredBookings.length}
-          </span>
-
-          <div>
-            <button>‹</button>
-
-            <button className={styles.current}>1</button>
-
-            <button>›</button>
-          </div>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          pageSize={pageSize}
+          onPageChange={loadBookings}
+        />
       </section>
     </div>
   );

@@ -1,0 +1,299 @@
+.page {
+  padding: 24px;
+  min-height: 100%;
+  background: #f6f7fb;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  p {
+    margin: 0;
+    color: #7b8496;
+    font-size: 14px;
+  }
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 40px;
+  padding: 0 16px;
+
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+
+  background: #fff;
+  color: #4b5563;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  &:hover {
+    border-color: #15397f;
+    color: #15397f;
+  }
+}
+
+.formCard {
+  margin: 0 auto;
+
+  background: #fff;
+  border: 1px solid #e7eaf0;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 22px 24px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  h3 {
+    margin: 0 0 5px;
+    font-size: 17px;
+    color: #1f2937;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: #8a93a3;
+  }
+}
+
+.formIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 10px;
+
+  background: #eef2fa;
+  color: #15397f;
+
+  font-size: 20px;
+}
+
+form {
+  padding: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.formGroup,
+.formGroupFull {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
+.formGroup label,
+.formGroupFull label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+
+  span {
+    color: #dc2626;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  i {
+    position: absolute;
+    left: 14px;
+
+    color: #8b95a7;
+    font-size: 16px;
+  }
+
+  input {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 14px 0 42px;
+
+    border: 1px solid #dfe3ea;
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #1f2937;
+    font-size: 14px;
+
+    transition: 0.2s;
+
+    &::placeholder {
+      color: #a5adba;
+    }
+
+    &:focus {
+      border-color: #15397f;
+      box-shadow: 0 0 0 3px rgba(21, 57, 127, 0.08);
+    }
+  }
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 24px;
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  background: #f5f7fb;
+
+  color: #7b8496;
+  font-size: 13px;
+
+  i {
+    color: #15397f;
+  }
+
+  strong {
+    color: #dc2626;
+  }
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 28px;
+  padding-top: 20px;
+
+  border-top: 1px solid #edf0f4;
+}
+
+.cancelBtn,
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 150px;
+  min-width: 130px;
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancelBtn {
+  border: 1px solid #dfe3ea;
+  background: #fff;
+  color: #5f6878;
+
+  &:hover:not(:disabled) {
+    border-color: #15397f;
+    color: #15397f;
+  }
+}
+
+.submitBtn {
+  border: 1px solid #15397f;
+  background: #15397f;
+  color: #fff;
+
+
+  &:disabled,
+  .cancelBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 16px;
+  }
+
+  .pageHeader {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGroupFull {
+    grid-column: auto;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelBtn,
+  .submitBtn {
+    width: 100%;
+  }
+}

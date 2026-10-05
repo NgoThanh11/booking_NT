@@ -115,7 +115,7 @@ export default function Booking() {
   }, []);
 
   // OPTIONS
-  const branchOptions = branches.map((branch) => ({
+  const branchOptions = branches?.map((branch) => ({
     value: branch.branchId,
     label: `${branch.branchName} - ${branch.branchAddress}`,
   }));
