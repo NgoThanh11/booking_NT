@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import styles from "../../../assets/styles/BranchDetail.module.scss";
+import styles from "../../../assets/styles/BranchAdmin/BranchDetail.module.scss";
 
 import { getBranchById } from "../../../api/BranchApi";
 // import { getBarbersByBranch } from "../../../api/BarberApi";

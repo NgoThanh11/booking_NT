@@ -73,7 +73,7 @@ export default function AdminLayout() {
       />
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
-          <div className={styles.logoIcon}>✂</div>
+          <div className={styles.logoIcon}><i className="bi bi-scissors"></i></div>
 
           <div>
             <Link to="/admin" className={styles.logoAdmin}>

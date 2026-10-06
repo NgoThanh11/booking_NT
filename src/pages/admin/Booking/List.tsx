@@ -264,7 +264,6 @@ export default function BookingAdmin() {
           <div>
             <h3>Danh sách đặt lịch</h3>
 
-            <span>Hiển thị {filteredBookings.length} lịch đặt</span>
           </div>
         </div>
 

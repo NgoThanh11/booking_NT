@@ -189,7 +189,7 @@ export default function Login() {
         {/* ================= LEFT ================= */}
         <div className={styles.loginLeft}>
           <div className={styles.logo}>
-            <span>✂</span>
+            <span><i className="bi bi-scissors"></i></span>
           </div>
 
           <h1>Barber Booking</h1>

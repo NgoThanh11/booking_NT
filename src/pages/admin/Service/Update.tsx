@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-import styles from "../../../assets/styles/ServiceAminAdd.module.scss";
+import styles from "../../../assets/styles/ServiceAdmin/ServiceAminAdd.module.scss";
 
 import {
   GetServiceImages,

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-import styles from "../../../assets/styles/BranchAdd.module.scss";
+import styles from "../../../assets/styles/BranchAdmin/BranchAdd.module.scss";
 import { createBranch } from "../../../api/BranchApi";
 
 export default function BranchAdd() {

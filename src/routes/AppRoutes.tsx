@@ -21,6 +21,7 @@ import UserAdmin from "../pages/admin/User/list";
 import UserAdd from "../pages/admin/User/add";
 import UserUpdate from "../pages/admin/User/update";
 import UserDetail from "../pages/admin/User/detail";
+import ServiceDetail from "../pages/admin/Service/Detail";
 
 
 export default function AppRoutes() {
@@ -62,6 +63,7 @@ export default function AppRoutes() {
             <Route path="service" element={<ServiceAdmin />} />
             <Route path="service/add" element={<ServiceAdd />} />
             <Route path="service/update/:id" element={<ServiceEdit />} />
+            <Route path="service/detail/:id" element={<ServiceDetail />} />
             //#endregion
             
             //#region Quản lý chi nhánh

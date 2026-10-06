@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-import styles from "../../../assets/styles/BranchAdd.module.scss";
+import styles from "../../../assets/styles/BranchAdmin/BranchAdd.module.scss";
 import { getBranchById, updateBranch } from "../../../api/BranchApi";
 
 interface FormData {

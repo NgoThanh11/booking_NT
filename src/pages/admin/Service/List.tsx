@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../../../assets/styles/ServiceAdmin.module.scss";
+import styles from "../../../assets/styles/ServiceAdmin/ServiceAdmin.module.scss";
 import { deleteService, GetAllServices } from "../../../api/ServiceApi";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
@@ -299,7 +299,7 @@ export default function ServiceAdmin() {
                           className={styles.viewBtn}
                           title="Xem chi tiết"
                           onClick={() =>
-                            navigate(`/admin/Service/${service.id}`)
+                            navigate(`/admin/Service/detail/${service.id}`)
                           }
                         >
                           <i className="bi bi-eye"></i>

@@ -365,8 +365,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-
+  width: 150px;
   margin-top: 10px;
+  
 }
 
 .secondaryBtn,
@@ -388,6 +389,7 @@
   border: 1px solid #ddd;
   background: #fff;
   color: #555;
+  
 }
 
 .cancelBtn {

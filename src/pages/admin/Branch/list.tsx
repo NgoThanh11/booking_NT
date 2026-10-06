@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../../../assets/styles/ServiceAdmin.module.scss";
+import styles from "../../../assets/styles/ServiceAdmin/ServiceAdmin.module.scss";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";

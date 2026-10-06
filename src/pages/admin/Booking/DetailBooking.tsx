@@ -277,13 +277,7 @@ export default function BookingDetail() {
           ← Quay lại
         </button>
 
-        {booking.status === "PENDING" && (
-          <>
-            <button className={styles.cancelBtn}>Hủy lịch</button>
-
-            <button className={styles.confirmBtn}>✓ Xác nhận lịch</button>
-          </>
-        )}
+       
       </div>
     </div>
   );
