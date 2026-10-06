@@ -12,12 +12,8 @@ const menuItems = [
   { path: "/admin/service", icon: "✂", label: "Dịch vụ" },
   { path: "/admin/barbers", icon: "♙", label: "Barber" },
   { path: "/admin/branch", icon: "⌖", label: "Chi nhánh" },
-  { path: "/admin/customers", icon: "♟", label: "Khách hàng" },
-  {
-    path: "/admin/service-images",
-    icon: "▧",
-    label: "Hình ảnh dịch vụ",
-  },
+  { path: "/admin/user", icon: "♟", label: "Khách hàng" },
+
   { path: "/admin/settings", icon: "⚙", label: "Cài đặt" },
 ];
 

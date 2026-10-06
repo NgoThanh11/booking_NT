@@ -17,6 +17,11 @@ import BranchUpdate from "../pages/admin/Branch/update";
 import Login from "../pages/Auth/login";
 import ProtectedRoute from "../pages/Auth/ProtectedRoute";
 import AdminRoute from "../pages/Auth/AdminRouter";
+import UserAdmin from "../pages/admin/User/list";
+import UserAdd from "../pages/admin/User/add";
+import UserUpdate from "../pages/admin/User/update";
+import UserDetail from "../pages/admin/User/detail";
+
 
 export default function AppRoutes() {
   return (
@@ -35,7 +40,7 @@ export default function AppRoutes() {
       {/* Quản trị */}
       <Route element={<AdminRoute />}>
         {" "}
-        // K cho khách hàng gõ đg dẫn để vào trang admin
+        // Không cho khách hàng gõ đg dẫn để vào trang admin
         <Route element={<ProtectedRoute />}>
           {" "}
           // Chặn khi ng dùng đăng xuất r back lại vẫn vào đc tk vx đăng nhập
@@ -45,20 +50,27 @@ export default function AppRoutes() {
             <Route path="Booking" element={<BookingAdmin />} />
             <Route path="Booking/:id" element={<BookingDetail />} />
             //#endregion
-            <Route path="barbers" element={<div>Barber</div>} />
-            <Route path="branches" element={<div>Chi nhánh</div>} />
-            <Route path="customers" element={<div>Khách hàng</div>} />
+
+            //#region Quản lý user
+            <Route path="user" element={<UserAdmin/>} />
+            <Route path="user/add" element={<UserAdd/>} />
+            <Route path="user/update/:id" element={<UserUpdate/>} />
+            <Route path="user/detail/:id" element={<UserDetail/>} />
+            //#endregion
+
             //#region Quản lý dịch vụ
             <Route path="service" element={<ServiceAdmin />} />
             <Route path="service/add" element={<ServiceAdd />} />
             <Route path="service/update/:id" element={<ServiceEdit />} />
-            //#endregion //#region Quản lý chi nhánh
+            //#endregion
+            
+            //#region Quản lý chi nhánh
             <Route path="branch" element={<BranchAdmin />} />
             <Route path="branch/detail/:id" element={<BranchDetail />} />
             <Route path="branch/add" element={<BranchAdd />} />
             <Route path="branch/update/:id" element={<BranchUpdate />} />
             //#endregion
-            <Route path="settings" element={<div>Cài đặt</div>} />
+       
           </Route>
         </Route>
       </Route>
