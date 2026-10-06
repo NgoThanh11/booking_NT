@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "../../assets/styles/Hero.module.scss";
 import HeroSlider from "../SliderShow/SliderShow";
-
 export default function Hero() {
   const navigate = useNavigate();
   return (
@@ -29,7 +28,7 @@ export default function Hero() {
               Đặt lịch ngay
             </button>
 
-            <button className={styles.secondaryBtn}>Xem dịch vụ</button>
+            <button className={styles.secondaryBtn} onClick={() => navigate("/HairCut")}>Xem dịch vụ</button>
           </div>
         </div>
 

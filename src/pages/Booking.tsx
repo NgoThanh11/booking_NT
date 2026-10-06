@@ -49,12 +49,13 @@ export default function Booking() {
         setLoadingBranches(true);
 
         const data = await getAllBranches();
-
-        if (!Array.isArray(data)) {
+        const res = data?.data
+        
+        if (!Array.isArray(res)) {
           throw new Error("Dữ liệu chi nhánh không hợp lệ");
         }
 
-        setBranches(data);
+        setBranches(res);
       } catch (error) {
         console.error(error);
 
@@ -98,12 +99,12 @@ export default function Booking() {
     const fetchServices = async () => {
       try {
         const data = await GetAllServices();
-
-        if (!Array.isArray(data)) {
+        const res = data?.data
+        if (!Array.isArray(res)) {
           throw new Error("Dữ liệu dịch vụ không hợp lệ");
         }
 
-        setServices(data);
+        setServices(res);
       } catch (error) {
         console.error(error);
 
@@ -131,6 +132,8 @@ export default function Booking() {
     value: service.id,
     label: service.name,
   }));
+  console.log("111111", branchOptions, serviceOptions, barberOptions);
+  
 
   // VALIDATE
   const validateForm = () => {
@@ -184,13 +187,13 @@ export default function Booking() {
     e.preventDefault();
 
     // Validate
-    // const isValid = validateForm();
+    const isValid = validateForm();
 
-    // if (!isValid) {
-    //   toast.error("Vui lòng kiểm tra lại thông tin");
+    if (!isValid) {
+      toast.error("Vui lòng kiểm tra lại thông tin");
 
-    //   return;
-    // }
+      return;
+    }
 
     const payload = {
       branchId,

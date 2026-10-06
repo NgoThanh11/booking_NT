@@ -7,17 +7,41 @@ const axiosClient = axios.create({
   },
   timeout: 90000,
 });
-// Thêm interceptor để đính kèm Token tự động
+// REQUEST: Gắn JWT vào request
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
+);
+
+
+// RESPONSE: Bắt lỗi 401
+
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+
+      // Tránh redirect nếu đang ở trang login
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+
+    return Promise.reject(error);
+  },
 );
 export default axiosClient;

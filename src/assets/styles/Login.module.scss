@@ -360,3 +360,23 @@
     padding: 40px 25px;
   }
 }
+.registerText {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+
+  button {
+    border: none;
+    background: transparent;
+    color: #15397f;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -29,3 +29,8 @@ export const logoutApi = async () => {
   );
   return response.data;
 };
+//Đăng ký tài khoản 
+export const registerApi = async(data: any) => {
+  const response = await axiosClient.post("/Auth/register", data);
+  return response.data;
+}
