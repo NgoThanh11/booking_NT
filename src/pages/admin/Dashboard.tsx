@@ -1,125 +1,102 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styles from "../../assets/styles/Dashboard.module.scss";
-
-const bookings = [
-  {
-    id: 1,
-    customer: "Nguyễn Văn A",
-    phone: "0987654321",
-    service: "Cắt tóc nam",
-    barber: "Ngo Trung Thanh",
-    date: "10/10/2026 08:00",
-    status: "Đã xác nhận",
-  },
-  {
-    id: 2,
-    customer: "Trần Minh Hoàng",
-    phone: "0978123456",
-    service: "Uốn tóc",
-    barber: "Lê Văn Hùng",
-    date: "10/10/2026 09:30",
-    status: "Đã xác nhận",
-  },
-  {
-    id: 3,
-    customer: "Lê Thị Bích",
-    phone: "0965432109",
-    service: "Nhuộm tóc",
-    barber: "Đỗ Văn Cường",
-    date: "10/10/2026 11:00",
-    status: "Chờ xử lý",
-  },
-  {
-    id: 4,
-    customer: "Phạm Đức Anh",
-    phone: "0912345678",
-    service: "Combo VIP",
-    barber: "Ngo Trung Thanh",
-    date: "10/10/2026 13:30",
-    status: "Đang diễn ra",
-  },
-  {
-    id: 5,
-    customer: "Hoàng Văn Nam",
-    phone: "0909876543",
-    service: "Cắt tỉa râu",
-    barber: "Lê Văn Hùng",
-    date: "10/10/2026 15:00",
-    status: "Chờ xác nhận",
-  },
-];
-
-const todayBookings = [
-  ["08:00", "Nguyễn Văn A", "Cắt tóc nam", "Đã xác nhận"],
-  ["09:30", "Trần Minh Hoàng", "Uốn tóc", "Đã xác nhận"],
-  ["11:00", "Lê Thị Bích", "Nhuộm tóc", "Chờ xử lý"],
-  ["13:30", "Phạm Đức Anh", "Combo VIP", "Đang diễn ra"],
-  ["15:00", "Hoàng Văn Nam", "Cắt tỉa râu", "Chờ xác nhận"],
-];
-
-const revenue = [
-  4500000,
-  6500000,
-  7200000,
-  8500000,
-  10200000,
-  9200000,
-  15000000,
-];
+import { dashboardApi } from "../../api/DashboardApi";
 
 export default function Dashboard() {
-  const maxRevenue = Math.max(...revenue);
+  const navigate = useNavigate();
+
+  const [dashboard, setDashboard] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadDashboard();
+  }, []);
+
+  const loadDashboard = async () => {
+    try {
+      setLoading(true);
+
+      const response = await dashboardApi();
+
+      if (response.success) {
+        setDashboard(response);
+      }
+    } catch (error) {
+      console.error("Lỗi lấy Dashboard:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div className={styles.loading}>Đang tải dữ liệu Dashboard...</div>;
+  }
+
+  if (!dashboard) {
+    return (
+      <div className={styles.loading}>Không thể tải dữ liệu Dashboard</div>
+    );
+  }
+
+  const { stats, revenue7Days, recentBookings, todaySchedule, serviceRevenue } =
+    dashboard;
+
+  const maxRevenue = Math.max(
+    ...revenue7Days.map((item: any) => item.revenue),
+    1,
+  );
 
   return (
     <div className={styles.dashboard}>
+      {/* HEADER */}
       <div className={styles.pageTitle}>
         <div>
           <h1>Dashboard</h1>
           <p>Tổng quan hoạt động của hệ thống đặt lịch Barber</p>
         </div>
-
-        <button className={styles.dateButton}>
-          ▣ &nbsp; Thứ 6, 10/10/2026 &nbsp;⌄
-        </button>
       </div>
 
       {/* KPI */}
       <div className={styles.stats}>
         <StatCard
-          icon="▣"
+          icon="bi-calendar-check"
           title="Tổng số booking"
-          value="128"
-          growth="12% so với tuần trước"
+          value={stats.totalBookings}
+          growth="Tất cả booking"
           type="blue"
         />
 
         <StatCard
-          icon="▣"
+          icon="bi-calendar-day"
           title="Booking hôm nay"
-          value="18"
-          growth="5% so với hôm qua"
+          value={stats.todayBookings}
+          growth="Booking trong ngày"
           type="green"
         />
 
         <StatCard
-          icon="◉"
+          icon="bi-cash-stack"
           title="Doanh thu hôm nay"
-          value="12.450.000 đ"
-          growth="18% so với hôm qua"
+          value={`${Number(stats.todayRevenue).toLocaleString("vi-VN")} đ`}
+          growth="Doanh thu trong ngày"
           type="orange"
         />
 
         <StatCard
-          icon="♟"
+          icon="bi-people"
           title="Tổng khách hàng"
-          value="356"
-          growth="10% so với tháng trước"
+          value={stats.totalCustomers}
+          growth="Khách hàng"
           type="purple"
         />
       </div>
 
       <div className={styles.mainGrid}>
+        {/* LEFT */}
         <div className={styles.left}>
-          {/* Chart */}
+          {/* CHART */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
               <div>
@@ -128,16 +105,16 @@ export default function Dashboard() {
 
               <select>
                 <option>Doanh thu</option>
-                <option>Booking</option>
               </select>
             </div>
 
             <div className={styles.chart}>
               <div className={styles.yAxis}>
-                <span>20M</span>
-                <span>15M</span>
-                <span>10M</span>
-                <span>5M</span>
+                <span>{(maxRevenue / 1000000).toFixed(0)}M</span>
+
+                <span>75%</span>
+                <span>50%</span>
+                <span>25%</span>
                 <span>0</span>
               </div>
 
@@ -151,17 +128,20 @@ export default function Dashboard() {
                 </div>
 
                 <div className={styles.bars}>
-                  {revenue.map((item, index) => (
-                    <div className={styles.barColumn} key={item}>
+                  {revenue7Days.map((item: any) => (
+                    <div className={styles.barColumn} key={item.date}>
                       <div
                         className={styles.bar}
                         style={{
-                          height: `${(item / maxRevenue) * 100}%`,
+                          height: `${(item.revenue / maxRevenue) * 100}%`,
                         }}
                       />
 
                       <span>
-                        {String(4 + index).padStart(2, "0")}/10
+                        {new Date(item.date).toLocaleDateString("vi-VN", {
+                          day: "2-digit",
+                          month: "2-digit",
+                        })}
                       </span>
                     </div>
                   ))}
@@ -170,13 +150,17 @@ export default function Dashboard() {
             </div>
           </section>
 
-          {/* Booking table */}
+          {/* RECENT BOOKING */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
               <h3>Danh sách lịch đặt gần đây</h3>
 
-              <button className={styles.viewAll}>
-                Xem tất cả →
+              <button
+                className={styles.viewAll}
+                onClick={() => navigate("/admin/Booking")}
+              >
+                Xem tất cả
+                <i className="bi bi-arrow-right" />
               </button>
             </div>
 
@@ -196,14 +180,14 @@ export default function Dashboard() {
                 </thead>
 
                 <tbody>
-                  {bookings.map((booking) => (
+                  {recentBookings.map((booking: any) => (
                     <tr key={booking.id}>
                       <td>{booking.id}</td>
 
                       <td>
                         <div className={styles.customer}>
                           <div className={styles.customerAvatar}>
-                            {booking.customer.charAt(0)}
+                            {booking.customer?.charAt(0)}
                           </div>
 
                           {booking.customer}
@@ -211,8 +195,11 @@ export default function Dashboard() {
                       </td>
 
                       <td>{booking.phone}</td>
+
                       <td>{booking.service}</td>
+
                       <td>{booking.barber}</td>
+
                       <td>{booking.date}</td>
 
                       <td>
@@ -220,7 +207,13 @@ export default function Dashboard() {
                       </td>
 
                       <td>
-                        <button className={styles.detailButton}>
+                        <button
+                          className={styles.detailButton}
+                          onClick={() =>
+                            navigate(`/admin/Booking/${booking.id}`)
+                          }
+                        >
+                          <i className="bi bi-eye" />
                           Chi tiết
                         </button>
                       </td>
@@ -234,56 +227,92 @@ export default function Dashboard() {
 
         {/* RIGHT */}
         <div className={styles.right}>
+          {/* TODAY */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
-              <h3>▣ &nbsp; Lịch hôm nay</h3>
+              <h3>
+                <i className="bi bi-calendar-week" /> &nbsp; Lịch hôm nay
+              </h3>
 
-              <button className={styles.viewAll}>
+              <button
+                className={styles.viewAll}
+                onClick={() => navigate("/admin/Booking")}
+              >
                 Xem tất cả →
               </button>
             </div>
 
             <div className={styles.todayList}>
-              {todayBookings.map((booking, index) => (
-                <div className={styles.todayItem} key={booking[0]}>
-                  <div className={styles.time}>{booking[0]}</div>
+              {todaySchedule.map((booking: any, index: number) => (
+                <div
+                  className={styles.todayItem}
+                  key={`${booking.time}-${index}`}
+                >
+                  <div className={styles.time}>{booking.time}</div>
 
                   <div className={styles.timelineDot} />
 
                   <div className={styles.todayInfo}>
-                    <strong>{booking[1]}</strong>
-                    <span>{booking[2]}</span>
+                    <strong>{booking.customer}</strong>
+
+                    <span>{booking.service}</span>
                   </div>
 
-                  <Status status={booking[3]} />
+                  <Status status={booking.status} />
                 </div>
               ))}
             </div>
           </section>
 
+          {/* QUICK STATS */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
-              <h3>▣ &nbsp; Thống kê nhanh</h3>
+              <h3>
+                <i className="bi bi-bar-chart-line" /> &nbsp; Thống kê nhanh
+              </h3>
             </div>
 
             <div className={styles.quickStats}>
-              <QuickStat icon="▣" title="Dịch vụ" value="6" />
-              <QuickStat icon="♙" title="Barber" value="4" />
-              <QuickStat icon="⌖" title="Chi nhánh" value="2" />
-              <QuickStat icon="♟" title="Khách hàng" value="356" />
+              <QuickStat
+                icon="bi-scissors"
+                title="Dịch vụ"
+                value={stats.totalServices}
+              />
+
+              <QuickStat
+                icon="bi-person-badge"
+                title="Barber"
+                value={stats.totalBarbers}
+              />
+
+              <QuickStat
+                icon="bi-geo-alt"
+                title="Chi nhánh"
+                value={stats.totalBranches}
+              />
+
+              <QuickStat
+                icon="bi-people"
+                title="Khách hàng"
+                value={stats.totalCustomers}
+              />
             </div>
           </section>
 
+          {/* SERVICE REVENUE */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
               <h3>Doanh thu theo dịch vụ</h3>
             </div>
 
-            <RevenueItem name="Combo VIP" percent={42} price="5.230.000 đ" />
-            <RevenueItem name="Nhuộm tóc" percent={25} price="3.120.000 đ" />
-            <RevenueItem name="Uốn tóc" percent={18} price="2.250.000 đ" />
-            <RevenueItem name="Cắt tóc nam" percent={10} price="1.210.000 đ" />
-            <RevenueItem name="Khác" percent={5} price="640.000 đ" />
+            {serviceRevenue.map((item: any) => (
+              <RevenueItem
+                key={item.name}
+                name={item.name}
+                percent={item.percent}
+                price={`${Number(item.revenue).toLocaleString("vi-VN")} đ`}
+              />
+            ))}
           </section>
         </div>
       </div>
@@ -300,20 +329,24 @@ function StatCard({
 }: {
   icon: string;
   title: string;
-  value: string;
+  value: string | number;
   growth: string;
   type: string;
 }) {
   return (
     <div className={styles.statCard}>
       <div className={`${styles.statIcon} ${styles[type]}`}>
-        {icon}
+        <i className={`bi ${icon}`} />
       </div>
 
       <div>
         <span>{title}</span>
+
         <strong>{value}</strong>
-        <small>↑ {growth}</small>
+
+        <small>
+          <i className="bi bi-arrow-up" /> {growth}
+        </small>
       </div>
     </div>
   );
@@ -326,14 +359,17 @@ function QuickStat({
 }: {
   icon: string;
   title: string;
-  value: string;
+  value: number;
 }) {
   return (
     <div className={styles.quickStat}>
-      <div>{icon}</div>
+      <div>
+        <i className={`bi ${icon}`} />
+      </div>
 
       <span>
         {title}
+
         <strong>{value}</strong>
       </span>
     </div>
@@ -365,14 +401,30 @@ function RevenueItem({
 }
 
 function Status({ status }: { status: string }) {
-  const className =
-    status === "Đã xác nhận"
-      ? styles.confirmed
-      : status === "Đang diễn ra"
-      ? styles.running
-      : status === "Chờ xử lý"
-      ? styles.pending
-      : styles.waiting;
+  let text = status;
+  let className = styles.waiting;
 
-  return <span className={`${styles.status} ${className}`}>{status}</span>;
+  switch (status) {
+    case "CONFIRMED":
+      text = "Đã xác nhận";
+      className = styles.confirmed;
+      break;
+
+    case "COMPLETED":
+      text = "Hoàn thành";
+      className = styles.running;
+      break;
+
+    case "PENDING":
+      text = "Chờ xử lý";
+      className = styles.pending;
+      break;
+
+    case "CANCELLED":
+      text = "Đã hủy";
+      className = styles.waiting;
+      break;
+  }
+
+  return <span className={`${styles.status} ${className}`}>{text}</span>;
 }

@@ -89,10 +89,6 @@
   font-size: 22px;
 }
 
-.statCard small {
-  color: #20a361;
-  font-size: 10px;
-}
 
 .mainGrid {
   display: grid;
@@ -114,33 +110,8 @@
   padding: 18px;
 }
 
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
 
-  h3 {
-    margin: 0;
-    font-size: 15px;
-  }
 
-  select {
-    border: 1px solid #e1e7ef;
-    padding: 7px 12px;
-    border-radius: 7px;
-    color: #56647a;
-    background: #fff;
-  }
-}
-
-.viewAll {
-  border: 0;
-  background: transparent;
-  color: #2275df;
-  cursor: pointer;
-  font-size: 12px;
-}
 
 .chart {
   height: 250px;
@@ -275,15 +246,7 @@ table {
   background: #edf1f5;
 }
 
-.detailButton {
-  border: 0;
-  background: #287bea;
-  color: #fff;
-  padding: 6px 11px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 10px;
-}
+
 
 .todayList {
   display: flex;
@@ -334,11 +297,6 @@ table {
   }
 }
 
-.quickStats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
 
 .quickStat {
   border: 1px solid #e8edf4;
@@ -438,4 +396,38 @@ table {
     gap: 10px;
     flex-direction: column;
   }
+}
+.statIcon i {
+  font-size: 22px;
+}
+
+.statCard small i {
+  font-size: 11px;
+  margin-right: 3px;
+}
+
+.cardHeader h3 i {
+  font-size: 16px;
+}
+
+.quickStat > div i {
+  font-size: 20px;
+}
+
+.viewAll {
+  border: 0;
+  background: transparent;
+  color: #2275df;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.detailButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.detailButton i {
+  font-size: 13px;
 }
