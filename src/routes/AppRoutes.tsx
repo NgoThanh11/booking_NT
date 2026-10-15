@@ -23,6 +23,8 @@ import UserUpdate from "../pages/admin/User/update";
 import UserDetail from "../pages/admin/User/detail";
 import ServiceDetail from "../pages/admin/Service/Detail";
 import BarberList from "../pages/admin/Barber/list";
+import BaberDetail from "../pages/admin/Barber/detail";
+import BarberAdd from "../pages/admin/Barber/add";
 
 
 export default function AppRoutes() {
@@ -76,6 +78,8 @@ export default function AppRoutes() {
 
             #region Quản lý barber
             <Route path="barber" element={<BarberList />} />
+            <Route path="barber/detail/:id" element={<BaberDetail />} />
+            <Route path="barber/create" element={<BarberAdd />} />
             
             #endregion
        

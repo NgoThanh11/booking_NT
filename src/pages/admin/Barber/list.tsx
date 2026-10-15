@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "../../../assets/styles/ServiceAdmin/ServiceAdmin.module.scss";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { getAllBarbers } from "../../../api/BarberApi";
+import { deleteBarber, getAllBarbers } from "../../../api/BarberApi";
 import Pagination from "../../../components/Pagination/Pagination";
+import Swal from "sweetalert2";
 
 interface Barber {
   barberId: number;
@@ -56,7 +57,32 @@ export default function BarberAdmin() {
   useEffect(() => {
     loadBarbers();
   }, []);
+  const handleDelete = async (id: number) => {
+    const result = await Swal.fire({
+      title: "Xóa dịch vụ?",
+      text: "Dịch vụ này sẽ bị xóa khỏi hệ thống.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Xóa",
+      cancelButtonText: "Hủy",
+      reverseButtons: true,
+    });
 
+    if (!result.isConfirmed) return;
+
+    try {
+      const response = await deleteBarber(id);
+
+      if (response?.success) {
+        toast.success(response.message || "Xóa Barber thành công");
+        await loadBarbers();
+      } else {
+        toast.error(response?.message || "Xóa Barber thất bại");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || "Có lỗi khi xóa Barber");
+    }
+  };
   // Định dạng số điện thoại
   const formatPhone = (phone: string) => {
     if (!phone) return "Chưa có số điện thoại";
@@ -113,7 +139,7 @@ export default function BarberAdmin() {
 
         <button
           className={styles.addBtn}
-          onClick={() => navigate("/admin/barbers/add")}
+          onClick={() => navigate("/admin/barber/create")}
         >
           <i className="bi bi-plus-lg"></i>
           <span>Thêm Barber</span>
@@ -250,7 +276,7 @@ export default function BarberAdmin() {
                           className={styles.deleteBtn}
                           title="Xóa"
                           onClick={() =>
-                            toast("Bạn cần tích hợp API xóa Barber")
+                            handleDelete(barber?.barberId)
                           }
                         >
                           <i className="bi bi-trash3"></i>
