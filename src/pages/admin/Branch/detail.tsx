@@ -14,23 +14,14 @@ interface Branch {
   createdAt: string;
 }
 
-interface Barber {
-  barberId: number;
-  name: string;
-  experience: string;
-  branchId: number;
-}
-
 export default function BranchDetail() {
   const { id } = useParams<{ id: string }>();
 
   const navigate = useNavigate();
 
   const [branch, setBranch] = useState<Branch | null>(null);
-  const [barbers, setBarbers] = useState<Barber[]>([]);
 
   const [loading, setLoading] = useState(true);
-  const [loadingBarbers, setLoadingBarbers] = useState(true);
 
   // =========================
   // FORMAT DATE
@@ -75,45 +66,13 @@ export default function BranchDetail() {
     }
   };
 
-  // =========================
-  // LOAD BARBERS
-  // =========================
-  //   const loadBarbers = async () => {
-  //     try {
-  //       setLoadingBarbers(true);
-
-  //       if (!id) return;
-
-  //       const branchId = Number(id);
-
-  //       const response = await getBarbersByBranch(branchId);
-
-  //       console.log("Barbers by branch:", response);
-
-  //       setBarbers(response || []);
-  //     } catch (error: any) {
-  //       console.error("Lỗi lấy Barber:", error);
-
-  //       toast.error(
-  //         error?.response?.data?.message ||
-  //           "Không thể lấy danh sách Barber"
-  //       );
-  //     } finally {
-  //       setLoadingBarbers(false);
-  //     }
-  //   };
-
-  // =========================
   // EFFECT
-  // =========================
   useEffect(() => {
     loadBranchDetail();
     // loadBarbers();
   }, [id]);
-
-  // =========================
   // LOADING
-  // =========================
+
   if (loading) {
     return (
       <div className={styles.page}>
@@ -128,9 +87,6 @@ export default function BranchDetail() {
     );
   }
 
-  // =========================
-  // NOT FOUND
-  // =========================
   if (!branch) {
     return (
       <div className={styles.page}>

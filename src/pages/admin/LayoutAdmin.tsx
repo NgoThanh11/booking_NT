@@ -10,7 +10,7 @@ const menuItems = [
   { path: "/admin", icon: "⌂", label: "Dashboard", end: true },
   { path: "/admin/Booking", icon: "▣", label: "Lịch đặt" },
   { path: "/admin/service", icon: "✂", label: "Dịch vụ" },
-  { path: "/admin/barbers", icon: "♙", label: "Barber" },
+  { path: "/admin/barber", icon: "♙", label: "Barber" },
   { path: "/admin/branch", icon: "⌖", label: "Chi nhánh" },
   { path: "/admin/user", icon: "♟", label: "Khách hàng" },
 

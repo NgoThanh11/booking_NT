@@ -22,6 +22,7 @@ import UserAdd from "../pages/admin/User/add";
 import UserUpdate from "../pages/admin/User/update";
 import UserDetail from "../pages/admin/User/detail";
 import ServiceDetail from "../pages/admin/Service/Detail";
+import BarberList from "../pages/admin/Barber/list";
 
 
 export default function AppRoutes() {
@@ -72,6 +73,11 @@ export default function AppRoutes() {
             <Route path="branch/add" element={<BranchAdd />} />
             <Route path="branch/update/:id" element={<BranchUpdate />} />
             //#endregion
+
+            #region Quản lý barber
+            <Route path="barber" element={<BarberList />} />
+            
+            #endregion
        
           </Route>
         </Route>
