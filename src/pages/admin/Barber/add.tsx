@@ -12,7 +12,6 @@ interface Branch {
   branchAddress: string;
   branchPhone: string;
   createdAt: string;
-  
 }
 
 export default function BarberAdd() {
@@ -23,6 +22,9 @@ export default function BarberAdd() {
     experience: "",
     phone: "",
     branchId: "",
+    idCard: "",
+    age: "",
+    placeResidence: "",
   });
 
   const [branches, setBranches] = useState<Branch[]>([]);
@@ -75,7 +77,7 @@ export default function BarberAdd() {
   const branchSelectStyles = {
     control: (base: any, state: any) => ({
       ...base,
-        height : "44px",
+      height: "44px",
       borderRadius: "8px",
       borderColor: state.isFocused ? "#15397F" : "#ced4da",
       boxShadow: state.isFocused ? "0 0 0 2px rgba(21, 57, 127, 0.12)" : "none",
@@ -121,6 +123,18 @@ export default function BarberAdd() {
       toast.error("Vui lòng chọn chi nhánh");
       return;
     }
+    if (!formData.placeResidence) {
+      toast.error("Vui lòng nhập quê quán");
+      return;
+    }
+    if (!formData.age) {
+      toast.error("Vui lòng nhập ngày sinh");
+      return;
+    }
+    if (!formData.idCard) {
+      toast.error("Vui lòng nhập căn cước công dân");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -130,6 +144,9 @@ export default function BarberAdd() {
         experience: formData.experience.trim(),
         phone: formData.phone.trim(),
         branchId: Number(formData.branchId),
+        placeResidence: formData.placeResidence,
+        age: formData.age,
+        idCard: formData.idCard,
       };
 
       console.log("Payload tạo Barber:", payload);
@@ -144,6 +161,9 @@ export default function BarberAdd() {
           experience: "",
           phone: "",
           branchId: "",
+          age: "",
+          idCard: "", 
+          placeResidence: "", 
         });
 
         setTimeout(() => {
@@ -236,7 +256,60 @@ export default function BarberAdd() {
                 />
               </div>
             </div>
+            <div className={styles.formGroup}>
+              <label>
+                Căn cước công dân <span>*</span>
+              </label>
 
+              <div className={styles.inputWrapper}>
+                <i className="bi bi-award"></i>
+
+                <input
+                  type="text"
+                  name="idCard"
+                  value={formData.idCard}
+                  onChange={handleChange}
+                  placeholder="Vui lòng nhập số căn cước công dân"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+            <div className={styles.formGroup}>
+              <label>
+                Ngày sinh <span>*</span>
+              </label>
+
+              <div className={styles.inputWrapper}>
+                <i className="bi bi-clock"></i>
+
+                <input
+                  type="date"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleChange}
+                  placeholder="Ngày sinh"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+            <div className={styles.formGroupFull}>
+              <label>
+                Quê quán <span>*</span>
+              </label>
+
+              <div className={styles.inputWrapper}>
+                <i className="bi bi-text"></i>
+
+                <input
+                  type="text"
+                  name="placeResidence"
+                  value={formData.placeResidence}
+                  onChange={handleChange}
+                  placeholder="Quê quán"
+                  disabled={loading}
+                />
+              </div>
+            </div>
             {/* KINH NGHIỆM */}
             <div className={styles.formGroup}>
               <label>
@@ -312,7 +385,7 @@ export default function BarberAdd() {
             <button
               type="button"
               className={styles.cancelBtn}
-              onClick={() => navigate("/admin/barbers")}
+              onClick={() => navigate("/admin/barber")}
               disabled={loading}
             >
               Quay lại

@@ -11,6 +11,9 @@ interface Barber {
   experience: string;
   phone: string;
   createDate: string;
+  age: string;
+  placeResidence: string;
+  idCard: string;
   branch: {
     branchId: number;
     branchName: string;
@@ -73,24 +76,7 @@ export default function BaberDetail() {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
-
     });
-  };
-
-  // =========================
-  // IMAGE URL
-  // =========================
-
-  const getImageUrl = (url: string) => {
-    if (!url) {
-      return "";
-    }
-
-    if (url.startsWith("http://") || url.startsWith("https://")) {
-      return url;
-    }
-
-    return `http://localhost:5021${url.startsWith("/") ? "" : "/"}${url}`;
   };
 
   // =========================
@@ -178,7 +164,7 @@ export default function BaberDetail() {
             <div className={styles.value}>
               <i className="bi bi-scissors"></i>
 
-              {baber.name}
+              {baber?.name}
             </div>
           </div>
 
@@ -188,7 +174,7 @@ export default function BaberDetail() {
             <span className={styles.label}>Kinh nghiệm</span>
 
             <div className={`${styles.value} ${styles.price}`}>
-              {baber.experience}
+              {baber?.experience}
             </div>
           </div>
 
@@ -200,7 +186,7 @@ export default function BaberDetail() {
             <div className={styles.value}>
               <i className="bi bi-phone"></i>
 
-              {baber.phone}
+              {baber?.phone}
             </div>
           </div>
 
@@ -213,15 +199,36 @@ export default function BaberDetail() {
 
           <div className={styles.infoItem}>
             <span className={styles.label}>
-              <i className="bi bi-calendar3"></i> 
-               Ngày tạo
+              <i className="bi bi-calendar3"></i>
+              Ngày tạo
             </span>
 
-            <strong>{formatDate(baber.createDate)}</strong>
+            <strong>{formatDate(baber?.createDate)}</strong>
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.label}>
+              <i className="bi bi-calendar3"></i>
+              Ngày sinh
+            </span>
+
+            <strong>{formatDate(baber?.age)}</strong>
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.label}>
+              Căn cước công dân
+            </span>
+
+            {(baber?.idCard)}
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.label}>
+              Quê quán
+            </span>
+
+            {(baber?.placeResidence)}
           </div>
         </div>
       </section>
-
     </div>
   );
 }

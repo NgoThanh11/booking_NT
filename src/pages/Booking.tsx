@@ -75,14 +75,15 @@ export default function Booking() {
     const fetchBarbers = async () => {
       try {
         setLoadingBarbers(true);
-
         const data = await getAllBarbers();
-
-        if (!Array.isArray(data)) {
+        const barbers = data?.data;
+        console.log("thanhtn", barbers);
+        
+        if (!Array.isArray(barbers)) {
           throw new Error("Dữ liệu barber không hợp lệ");
         }
 
-        setBarbers(data);
+        setBarbers(barbers);
       } catch (error) {
         console.error(error);
 
@@ -122,17 +123,17 @@ export default function Booking() {
   }));
 
   const barberOptions = barbers
-    .filter((barber) => barber.branchId === branchId)
+    .filter((barber) => barber?.branch?.branchId === branchId)
     .map((barber) => ({
       value: barber.barberId,
-      label: `${barber.name} - ${barber.experience || ""}`,
+      label: `${barber.name} `,
     }));
 
   const serviceOptions = services.map((service) => ({
     value: service.id,
     label: service.name,
   }));
-  console.log("111111", branchOptions, serviceOptions, barberOptions);
+  console.log("111111", barberOptions);
   
 
   // VALIDATE

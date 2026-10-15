@@ -25,6 +25,7 @@ import ServiceDetail from "../pages/admin/Service/Detail";
 import BarberList from "../pages/admin/Barber/list";
 import BaberDetail from "../pages/admin/Barber/detail";
 import BarberAdd from "../pages/admin/Barber/add";
+import BarberUpdate from "../pages/admin/Barber/update";
 
 
 export default function AppRoutes() {
@@ -80,6 +81,7 @@ export default function AppRoutes() {
             <Route path="barber" element={<BarberList />} />
             <Route path="barber/detail/:id" element={<BaberDetail />} />
             <Route path="barber/create" element={<BarberAdd />} />
+            <Route path="barber/update/:id" element={<BarberUpdate />} />
             
             #endregion
        

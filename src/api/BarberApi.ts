@@ -11,12 +11,12 @@ export const getByIdBarber = async (id: number) => {
 };
 //Xóa barber
 export const deleteBarber = async (id: number) => {
-  const response = await axiosClient.delete(`/Barbers/update-baber?id=${id}`);
+  const response = await axiosClient.delete(`/Barbers/delete-baber?id=${id}`);
   return response.data;
 };
 //sửa barber
 export const updateBarber = async (id: number, data: any) => {
-  const response = await axiosClient.put(`/Barbers/delete-baber?id=${id}`, data);
+  const response = await axiosClient.put(`/Barbers/update-baber?id=${id}`, data);
   return response.data;
 };
 //Thêm barber
