@@ -23,7 +23,7 @@ export default function Booking() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [voucher, setVoucher] = useState("");
-
+  const [showTimeSlots, setShowTimeSlots] = useState(false);
   const [loadingBranches, setLoadingBranches] = useState(false);
   const [loadingBarbers, setLoadingBarbers] = useState(false);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -39,7 +39,25 @@ export default function Booking() {
     phone?: string;
     email?: string;
   }>({});
-
+  const timeSlots = [
+    "08:00",
+    "08:30",
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00",
+    "17:30",
+    "18:00",
+  ];
   // ================================
   // LẤY BRANCH
   // ================================
@@ -49,8 +67,8 @@ export default function Booking() {
         setLoadingBranches(true);
 
         const data = await getAllBranches();
-        const res = data?.data
-        
+        const res = data?.data;
+
         if (!Array.isArray(res)) {
           throw new Error("Dữ liệu chi nhánh không hợp lệ");
         }
@@ -78,7 +96,7 @@ export default function Booking() {
         const data = await getAllBarbers();
         const barbers = data?.data;
         console.log("thanhtn", barbers);
-        
+
         if (!Array.isArray(barbers)) {
           throw new Error("Dữ liệu barber không hợp lệ");
         }
@@ -100,7 +118,7 @@ export default function Booking() {
     const fetchServices = async () => {
       try {
         const data = await GetAllServices();
-        const res = data?.data
+        const res = data?.data;
         if (!Array.isArray(res)) {
           throw new Error("Dữ liệu dịch vụ không hợp lệ");
         }
@@ -134,7 +152,6 @@ export default function Booking() {
     label: service.name,
   }));
   console.log("111111", barberOptions);
-  
 
   // VALIDATE
   const validateForm = () => {
@@ -150,10 +167,6 @@ export default function Booking() {
 
     if (!bookingTime) {
       newErrors.bookingTime = "Vui lòng chọn giờ";
-    }
-
-    if (!barberId) {
-      newErrors.barberId = "Vui lòng chọn barber";
     }
 
     if (serviceIds.length === 0) {
@@ -198,7 +211,7 @@ export default function Booking() {
 
     const payload = {
       branchId,
-      barberId,
+      barberId: barberId ?? null,
       serviceIds,
       Branch_text:
         branchOptions.find((item) => item.value === branchId)?.label || "",
@@ -297,7 +310,7 @@ export default function Booking() {
                 CƠ SỞ
             ================================= */}
             <div className={styles.group}>
-              <label>Cơ sở</label>
+              <label>Cơ sở<span style={{color: "red"}}>*</span></label> 
 
               <SelectCustom
                 options={branchOptions}
@@ -326,19 +339,19 @@ export default function Booking() {
                 NGÀY
             ================================= */}
             <div className={styles.group}>
-              <label>Ngày</label>
+              <label>Ngày đặt<span style={{color: "red"}}>*</span></label>
 
               <input
                 type="date"
                 value={bookingDate}
                 onChange={(e) => {
                   setBookingDate(e.target.value);
-
                   setErrors((prev) => ({
                     ...prev,
                     bookingDate: undefined,
                   }));
                 }}
+                min={new Date().toLocaleDateString("en-CA")}
               />
 
               {errors.bookingDate && (
@@ -350,20 +363,44 @@ export default function Booking() {
                 GIỜ
             ================================= */}
             <div className={styles.group}>
-              <label>Giờ</label>
+              <label>Giờ đặt<span style={{color: "red"}}>*</span></label>
 
-              <input
-                type="time"
-                value={bookingTime}
-                onChange={(e) => {
-                  setBookingTime(e.target.value);
+              <div className={styles.timePicker}>
+                <input
+                  type="text"
+                  placeholder="Chọn giờ đặt"
+                  value={bookingTime}
+                  readOnly
+                  onClick={() => setShowTimeSlots((prev) => !prev)}
+                />
 
-                  setErrors((prev) => ({
-                    ...prev,
-                    bookingTime: undefined,
-                  }));
-                }}
-              />
+                {showTimeSlots && (
+                  <div className={styles.timeDropdown}>
+                    <div className={styles.timeSlots}>
+                      {timeSlots.map((time) => (
+                        <button
+                          key={time}
+                          type="button"
+                          className={`${styles.timeSlot} ${
+                            bookingTime === time ? styles.activeTime : ""
+                          }`}
+                          onClick={() => {
+                            setBookingTime(time);
+                            setShowTimeSlots(false);
+
+                            setErrors((prev) => ({
+                              ...prev,
+                              bookingTime: undefined,
+                            }));
+                          }}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {errors.bookingTime && (
                 <small style={{ color: "red" }}>{errors.bookingTime}</small>
@@ -403,7 +440,7 @@ export default function Booking() {
                 SERVICE
             ================================= */}
             <div className={`${styles.group} ${styles.full}`}>
-              <label>Dịch vụ</label>
+              <label>Dịch vụ<span style={{color: "red"}}>*</span></label>
 
               <SelectCustom
                 options={serviceOptions}
@@ -431,7 +468,7 @@ export default function Booking() {
                 HỌ TÊN
             ================================= */}
             <div className={styles.group}>
-              <label>Họ và tên</label>
+              <label>Họ và tên<span style={{color: "red"}}>*</span></label>
 
               <input
                 type="text"
@@ -456,7 +493,7 @@ export default function Booking() {
                 PHONE
             ================================= */}
             <div className={styles.group}>
-              <label>Số điện thoại</label>
+              <label>Số điện thoại<span style={{color: "red"}}>*</span></label>
 
               <input
                 type="tel"
@@ -481,7 +518,7 @@ export default function Booking() {
                 EMAIL
             ================================= */}
             <div className={styles.group}>
-              <label>Email</label>
+              <label>Email<span style={{color: "red"}}>*</span></label>
 
               <input
                 type="email"

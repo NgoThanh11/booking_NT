@@ -333,3 +333,75 @@ button {
     transform: scale(1) translateY(0);
   }
 }
+// css giờ đặt lịch
+.timePicker {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}
+
+.timeDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.timeSlots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.timeSlot {
+  min-width: 0;
+  padding: 10px 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #15397f;
+    color: #15397f;
+  }
+}
+
+.activeTime {
+  background: #15397f;
+  color: #fff;
+  border-color: #15397f;
+}
+
+@media (max-width: 480px) {
+  .timeSlots {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .timeDropdown {
+    padding: 8px;
+    max-height: 200px;
+  }
+
+  .timeSlot {
+    padding: 10px 2px;
+    font-size: 12px;
+  }
+}
