@@ -16,11 +16,26 @@ export const deleteBarber = async (id: number) => {
 };
 //sửa barber
 export const updateBarber = async (id: number, data: any) => {
-  const response = await axiosClient.put(`/Barbers/update-baber?id=${id}`, data);
+  const response = await axiosClient.put(
+    `/Barbers/update-baber?id=${id}`,
+    data,
+  );
   return response.data;
 };
 //Thêm barber
 export const createBarber = async (data: any) => {
   const response = await axiosClient.post(`/Barbers/create-baber`, data);
+  return response.data;
+};
+//Search
+export const searchBarber = async (data: {
+  name?: string;
+  phone?: string;
+  branchId?: number | null;
+  page?: number;
+  pageSize?: number;
+}) => {
+  const response = await axiosClient.post("/Barbers/search-barber", data);
+
   return response.data;
 };
